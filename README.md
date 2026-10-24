@@ -6,4 +6,4 @@ pip install -r requirements.txt
 
 streamlit run app.py
 
-For the AI chat paste a Gemini API key in the sidebar.
+For the AI chat paste a Chat Gpt API key in the sidebar.
