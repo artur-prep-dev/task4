@@ -1,0 +1,6 @@
+streamlit
+pandas>=2.0
+pyarrow
+pyyaml
+plotly
+requests
