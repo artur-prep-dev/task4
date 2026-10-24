@@ -153,7 +153,16 @@ def apply_filters(data, f):
     return users, books, orders
 
 PROMPT = """You are a helper in a dashboard of book stores.
-Answer in the user's language. Use only the numbers given here or SQL results, never guess."""
+Answer in the user's language. Use only the numbers given here or SQL results, never guess.
+Reply ONLY with JSON like this:
+{"answer": "text for the user", "sql": "", "filters": {}}
+"sql": if the numbers below are not enough, write one SQLite SELECT query and leave "answer" empty.
+SQL runs on the current store. You will get the result and then write the answer.
+"filters": to change the dashboard, put only the keys you want to change:
+"store": "STORE1".."STORE5", "start" and "end": "YYYY-MM-DD" or "", "chart": "line" or "bar",
+"hidden_books": [book ids], "emails": [email beginnings to show], "marked": [email beginnings to mark].
+To remove all filters: {"clear": true}.
+"""
 
 def run_sql(data, sql):
     if sql.split()[0].lower() not in ["select", "with"]:
