@@ -7,7 +7,7 @@ import streamlit as st
 import yaml
 
 FOLDER = Path(__file__).parent / "data"
-AI_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
+AI_URL = "https://api.openai.com/v1/chat/completions"
 FIELDS = ["name", "address", "phone", "email"]
 
 def get_price(text):
@@ -258,8 +258,8 @@ def sidebar(stores, f):
     if st.sidebar.button("Clear filters"):
         f.update(empty_filters(store))
         reload()
-    model = st.sidebar.text_input("AI model", "gemini-flash-latest")
-    key = st.sidebar.text_input("Gemini API key", type="password")
+    model = st.sidebar.text_input("AI model", "gpt-6-luna")
+    key = st.sidebar.text_input("OpenAI API key", type="password")
     if not key:
         try:
             key = st.secrets["LLM_API_KEY"]
@@ -275,7 +275,7 @@ def chat(stores, f, key, model):
                 with st.expander("Details"):
                     st.json(m["used"])
     if not key:
-        st.info("Paste your Gemini API key on the left.")
+        st.info("Paste your OpenAI API key on the left.")
         return
     question = st.chat_input("Ask about the data or give a command")
     if question:
